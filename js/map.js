@@ -9,3 +9,19 @@ var OpenStreetMap_Mapnik = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x
 }).addTo(map);
 
 
+var SerialPort = require('serialport');
+var port = new SerialPort.SerialPort('/dev/tty.usbserial', { // change path
+    baudrate: 4800,
+    parser: SerialPort.parsers.readline('\r\n')
+});
+
+var GPS = require('gps');
+var gps = new GPS;
+
+gps.on('data', function(data) {
+    console.log(data, gps.state);
+});
+
+port.on('data', function(data) {
+    gps.update(data);
+});
