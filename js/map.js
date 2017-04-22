@@ -10,7 +10,7 @@ var OpenStreetMap_Mapnik = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x
 
 
 var SerialPort = require('serialport');
-var port = new SerialPort.SerialPort('/dev/tty.usbserial', { // change path
+var port = new SerialPort.SerialPort('/dev/ttyUSB0', { // change path
     baudrate: 4800,
     parser: SerialPort.parsers.readline('\r\n')
 });
